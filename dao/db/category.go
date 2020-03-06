@@ -45,7 +45,7 @@ func GetCategories(ids []int64) (categories []*model.Category, err error) {
 
 func GetAllCategories() (categories []*model.Category, err error) {
 	query := "SELECT `id`, `category_name`, `category_no` FROM `category` ORDER BY `category_no` ASC"
-	err = DB.Get(&categories, query)
+	err = DB.Select(&categories, query)
 	if err != nil {
 		fmt.Printf("DB.Get(%#v, %#v) return: (%#v)\n", &categories, query, err)
 	}
