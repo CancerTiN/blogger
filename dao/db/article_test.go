@@ -13,20 +13,28 @@ func TestInsertArticle(t *testing.T) {
 		Content: "GoTestContent",
 	}
 	t.Logf("article: %#v\n", article)
-	articleId, err := InsertArticle(article)
+	id, err := InsertArticle(article)
 	if err != nil {
 		panic(err)
 	}
-	t.Logf("articleId: %#v\n", articleId)
+	t.Logf("id: %#v\n", id)
 }
 
 func TestGetArticleInfos(t *testing.T) {
-	articleInfos, err := GetArticleInfos(1, 15)
+	infos, err := GetArticleInfos(0, 15)
 	if err != nil {
 		panic(err)
 	}
-	t.Logf("articleInfos: %#v\n", articleInfos)
-	for _, articleInfo := range articleInfos {
-		t.Logf("articleInfo: %#v\n", articleInfo)
+	t.Logf("infos: %#v\n", infos)
+	for _, info := range infos {
+		t.Logf("info: %#v\n", info)
 	}
+}
+
+func TestGetArticleDetail(t *testing.T) {
+	detail, err := GetArticleDetail(1)
+	if err != nil {
+		panic(err)
+	}
+	t.Logf("detail: %#v\n", detail)
 }

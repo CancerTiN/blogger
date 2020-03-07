@@ -26,11 +26,11 @@ func GetArticleInfos(pageNum, pageSize int) (articleInfos []*model.ArticleInfo, 
 		return
 	}
 	query := "SELECT `id`, `summary`, `title`, `view_count`, `create_time`, `comment_count`, `username`, `category_id` FROM `article` WHERE `status` = 1 ORDER BY `create_time` DESC LIMIT ?, ?"
-	err = DB.Select(&articleInfos, query, pageNum-1, pageSize)
+	err = DB.Select(&articleInfos, query, pageNum, pageSize)
 	return
 }
 
-func GetArticleDetail(articleId int64) (articleDetail *model.ArticleDetail, err error) {
+func GetArticleDetail(articleId int64) (articleDetail model.ArticleDetail, err error) {
 	if articleId < 0 {
 		return
 	}
@@ -39,11 +39,11 @@ func GetArticleDetail(articleId int64) (articleDetail *model.ArticleDetail, err 
 	return
 }
 
-func GetArticleInfosByCategoryId(categoryId, int64, pageNum, pageSize int) (articleInfos []*model.ArticleInfo, err error) {
+func GetArticleInfosByCategoryId(categoryId int64, pageNum, pageSize int) (articleInfos []*model.ArticleInfo, err error) {
 	if pageNum < 0 || pageSize < 0 {
 		return
 	}
 	query := "SELECT `id`, `summary`, `title`, `view_count`, `create_time`, `comment_count`, `username`, `category_id` FROM `article` WHERE `category_id` = ? AND `status` = 1 ORDER BY `create_time` DESC LIMIT ?, ?"
-	err = DB.Select(&articleInfos, query, categoryId, pageNum-1, pageSize)
+	err = DB.Select(&articleInfos, query, categoryId, pageNum, pageSize)
 	return
 }
